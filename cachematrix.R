@@ -4,7 +4,17 @@
 ## Write a short comment describing this function
 
 makeCacheMatrix <- function(x = matrix()) {
-
+    m <- NULL;
+    set <- function(y) {
+      x <<- y
+      tryCatch(m <<- solve(y), 
+               warning = function(w) {warning(paste("Matrix is not invertible"))},
+               error = function(e) {warning(paste("Matrix is not invertible"))}
+               );
+    }
+    get <- function() {x}
+    getInverse <- function() {m}
+    list(set = set, get = get, getInverse = getInverse)
 }
 
 
